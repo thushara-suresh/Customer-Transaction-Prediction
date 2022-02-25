@@ -94,5 +94,5 @@ if uploaded_file is not None:
                                # data=y_pred ,
                                # file_name= 'predictions.csv')
 
-         st.download_button('Download Results',y_pred_file, 'text/csv')
+         st.download_button('Download Results',y_pred, 'predictions.csv', 'text/csv')
 
