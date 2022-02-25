@@ -64,24 +64,27 @@ with st.expander("Input dataset - Sample Template"):
 uploaded_file = st.file_uploader("Upload a csv file containing test data")
 if uploaded_file is not None:
      df = pd.read_csv(uploaded_file)
-     st.write("File Uploaded Successfully")
+     st.success("File Uploaded Successfully")
 
          
      with st.expander(uploaded_file.name):
          st.write(df.head())
          
      if st.button("Predict"):    
+         my_bar = st.progress(0)
          x_test_ID = df['ID_code']
          x_test = df.drop(labels=['ID_code'], axis=1)
          
-         "done"
+         my_bar.progress(5)
          x_test_final = featurization(lgbm_multiclass, x_test)
-         "featurization done"
+         
+         my_bar.progress(50)
          #final prediction of the customer's likelihood of making a transaction based on the 209 features
          y_featurized_pred = lgbm_final.predict(x_test_final)
-         "prediction done"
-         y_pred = pd.DataFrame( {'ID_code':x_test_ID, 'target': y_featurized_pred})            
          
+         my_bar.progress(99)
+         y_pred = pd.DataFrame( {'ID_code':x_test_ID, 'target': y_featurized_pred})            
+         my_bar.progress(100)
          st.write(y_pred)
      
     
