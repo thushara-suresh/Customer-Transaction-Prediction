@@ -86,7 +86,10 @@ if uploaded_file is not None:
          y_pred = pd.DataFrame( {'ID_code':x_test_ID, 'target': y_featurized_pred})            
          my_bar.progress(100)
          st.write(y_pred)
-     
+         
+         my_bar.empty()
+         if st.button("Download Results"):
+             test_template.to_csv("predictions.csv", index=False)
     
 
      
