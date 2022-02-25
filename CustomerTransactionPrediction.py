@@ -88,9 +88,11 @@ if uploaded_file is not None:
          st.write(y_pred)
          
          my_bar.empty()
-         if st.button("Download Results"):
-             test_template.to_csv("predictions.csv", index=False)
-    
+         #if st.button("Download Results"):
+             #test_template.to_csv("predictions.csv", index=False)
+         st.download_button(label='📥 Download Result',
+                                data=y_pred ,
+                                file_name= 'predictions.csv')
 
      
 
